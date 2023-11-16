@@ -55,6 +55,16 @@ def do_logout():
         del session[CURR_USER_KEY]
 
 
+##############################################################################
+# About page
+
+@app.route('/about')
+def show_about_page():
+    """Show about page."""
+
+    return render_template('about.html')
+
+
 ###############################################################################
 # Signup, login, logout routes 
 
