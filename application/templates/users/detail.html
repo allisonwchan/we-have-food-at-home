@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-1">
+    <img src="{{ user.image_url }}" id="profile-pic-user-list">
+  </div>
+  <div class="col-lg-11">
+    <h1>{{ user.username }}</h1>
+  </div>
+</div> 
+
+<br>
+
+<ul class="nav nav-tabs" id="user-tabs" role="tablist">
+    <li class="nav-item" role="presentation">
+      <a class="nav-link active" data-bs-toggle="tab" href="#recipes" aria-selected="true" role="tab">Saved recipes</a>
+    </li>
+
+    {% if g.user and g.user.id == user.id %}
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" data-bs-toggle="tab" href="#profile" aria-selected="false" role="tab" tabindex="-1">Profile</a>
+    </li>
+    {% else %}
+    <li class="nav-item" role="presentation">
+      <a class="nav-link disabled" href="#" aria-selected="false" tabindex="-1" role="tab">Profile</a>
+    </li>
+    {% endif %}
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade active show" id="recipes" role="tabpanel">
+        <div class="row mt-4">
+          <div class="row">
+            {% for recipe in user.recipes %}
+            <div class="card border-light" style="max-width: 20.5rem;">
+                <div class="card-body">
+                    <div class="position-relative mb-3">
+                        <a href="/recipes/{{ recipe['id'] }}" target="_blank" rel="noopener noreferrer">
+                            <img class="card-img-top" src="{{ recipe['image'] }}" alt="Recipe image">
+                        </a>
+                        
+                        {% if g.user and not g.user.is_saved(recipe) %}
+                        <form method="POST" action="{{ url_for('save_recipe', api_id=recipe['id'], page='user_detail') }}" class="position-absolute top-0 start-1">   
+                            <button class="btn btn-sm btn-primary">
+                              <i class="bi bi-bookmark"></i>
+                            </button>
+                        </form>
+                        {% elif g.user %}
+                        <form method="POST" action="{{ url_for('unsave_recipe', api_id=recipe['api_id'], page='user_detail') }}" class="position-absolute top-0 start-1">
+                          <button class="btn btn-sm btn-danger">
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </form>
+                        {% else %}
+                        <form method="GET" action="{{ url_for('login') }}" class="position-absolute top-0 start-1">
+                            <button class="btn btn-sm btn-primary">
+                              <i class="bi bi-bookmark"></i>
+                            </button>
+                        </form>
+                        {% endif %}
+                    </div>
+          
+                    <h4 class="card-title">{{ recipe["title"] }}</h4>
+                    
+                </div>
+              </div>
+              {% endfor %}
+          </div> 
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="profile" role="tabpanel">
+        <div class="form-group row">
+            <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="{{ user.email }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticUsername" class="col-sm-2 col-form-label">Username</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticUsername" value="{{ user.username}}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticImageUrl" class="col-sm-2 col-form-label">Image URL</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticImageUrl" value="{{ user.image_url }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticDiet" class="col-sm-2 col-form-label">Diet</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticDiet" value="{{ user.diet }}">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="staticAllergies" class="col-sm-2 col-form-label">Allergies</label>
+            <div class="col-sm-10">
+              <input type="text" readonly="" class="form-control-plaintext" id="staticAllergies" value="{{ user.allergies }}">
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div>
+                <form method="POST" action="/users/delete">
+                    <a class="btn btn-md btn-primary" href="/users/{{ user.id }}/update">
+                        Update profile
+                    </a>
+                    <button class="btn btn-md btn-outline-danger">
+                        Delete profile
+                    </button>   
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

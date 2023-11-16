@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Results for '{{ query }}'</h1>
+
+<div class="row">
+    {% for recipe in recipes %}
+    <div class="card border-light" style="max-width: 20.5rem;">
+        <div class="card-body">
+            <div class="position-relative mb-3">
+                <a href="/recipes/{{ recipe['id'] }}" target="_blank" rel="noopener noreferrer">
+                    <img class="card-img-top" src="{{ recipe['image'] }}" alt="Recipe image">
+                </a>
+                
+                {% if g.user %}
+                <form method="POST" action="{{ url_for('save_recipe', recipe_api_id=recipe['id'], page='results') }}" class="position-absolute top-0 start-1">
+                    <button class="
+                    btn 
+                    btn-sm 
+                    {{'btn-primary' if recipe['id'] in api_ids else 'btn-secondary'}}"
+                    >
+                    <i class="bi bi-bookmark"></i>
+                    </button>
+                </form>
+                {% else %}
+                <form method="GET" action="{{ url_for('login') }}" class="position-absolute top-0 start-1">
+                    <button class="
+                    btn 
+                    btn-sm 
+                    btn-secondary"
+                    >
+                    <i class="bi bi-bookmark"></i>
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+
+            <h4 class="card-title">{{ recipe["title"] }}</h4>
+            
+        </div>
+      </div>
+      {% endfor %}
+</div>
+
+{% endblock %}

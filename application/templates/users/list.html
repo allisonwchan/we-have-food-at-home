@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Users</h1>
+
+<div class="row">
+    {% for user in users %}
+    <div class="card border-light mb-3" style="max-width: 20rem;">
+        <div class="card-body">
+            <a href="/users/{{user.id}}" class="stretched-link mb-1 d-flex justify-content-center">
+                <img src="{{ user.image_url }}" alt="{{ user.username }}" class="img-thumbnail" id="profile-pic-user-list">
+            </a>
+            <h4 class="card-title mt-1 mb-0 d-flex justify-content-center">{{ user.username }}</h4>
+            <p class="mb-1 d-flex justify-content-center">Saved recipes | {{ user.recipes | length }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card mb-3">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{ recipe_info['image'] }}" class="img-fluid rounded-start" alt="Recipe image" style="width: 100%;">
+      </div>
+
+      <div class="col-md-6">  
+        <div class="card-body">
+            <h2 class="card-title">{{ recipe_info["title"] }}</h2>
+            <p>Ready in: {{ recipe_info["readyInMinutes"] }} minutes</p>
+            <p>Servings: {{ recipe_info["servings"] }}</p>
+
+            {% if g.user and not g.user.is_saved(recipe) %}
+            <form action="{{ url_for('save_recipe', api_id=recipe_info['id'], page='detail') }}" method="POST">
+                <button class="btn btn-lg btn-primary">
+                    <i class="bi bi-bookmark"></i>
+                  </button>
+                <a href="{{ recipe_info['sourceUrl'] }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-lg">
+                    Go to source
+                </a>
+            </form>
+            {% else %}
+            <form action="{{ url_for('unsave_recipe', api_id=recipe_info['id'], page='detail') }}" method="POST">
+                <button class="btn btn-lg btn-danger">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                <a href="{{ recipe_info['sourceUrl'] }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-secondary btn-lg">
+                    Go to source
+                </a>
+            </form>
+            {% endif %}
+            
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="card mb-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Ingredients</h4>
+            <ul>
+                {% for ingredient in recipe_info["extendedIngredients"] %}
+                    <li>{{ ingredient["original"] }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <h4>You may also like these recipes!</h4>
+            <ul>
+                {% for recipe in similar_recipes %}
+                    <li><a href="/recipes/{{ recipe['id'] }}" target="_blank">
+                            {{ recipe['title'] }}">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

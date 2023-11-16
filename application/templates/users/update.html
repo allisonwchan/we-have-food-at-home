@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-md-center">
+    <div class="col-md-7 col-lg-5">
+      <h2 class="join-message">Update profile</h2>
+      <form method="POST" id="user_form">
+        {{ form.hidden_tag() }}
+  
+        {% for field in form if field.widget.input_type != 'hidden' %}
+          {% for error in field.errors %}
+            <span class="text-danger">{{ error }}</span>
+          {% endfor %}
+          {{ field.label}}
+          {{ field(placeholder=field.label.text, class="form-control") }}
+        {% endfor %}
+  
+        <a href="/users/{{ user.id }}" class="btn btn-outline-info btn-md mt-3">Cancel</a>
+        <button class="btn btn-primary btn-md btn-block mt-3">Update!</button>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
