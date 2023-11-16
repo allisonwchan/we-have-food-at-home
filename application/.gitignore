@@ -2,3 +2,4 @@ venv
 sample_data
 secret_keys.py
 __pycache__
+.env

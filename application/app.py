@@ -7,7 +7,10 @@ from werkzeug.datastructures import MultiDict
 
 from forms import UserAddForm, UserUpdateForm, LoginForm, SearchForm, AdvancedSearchForm
 from models import db, connect_db, User, Recipe
-from secret_keys import API_SECRET_KEY
+from dotenv import load_dotenv
+
+load_dotenv()
+API_SECRET_KEY=os.environ['API_SECRET_KEY']
 
 CURR_USER_KEY = "curr_user"
 BASE_URL = "https://api.spoonacular.com/recipes"
@@ -183,7 +186,7 @@ def show_results():
     """Show recipes that include ingredients inputted by user.
     Return 30 recipes by default."""
 
-    default_num_recipes = 3
+    default_num_recipes = 9
 
     if request.args.get("query") is None:
         return redirect("/")

@@ -14,7 +14,7 @@
                 </a>
                 
                 {% if g.user %}
-                <form method="POST" action="{{ url_for('save_recipe', recipe_api_id=recipe['id'], page='results') }}" class="position-absolute top-0 start-1">
+                <form method="POST" action="{{ url_for('save_recipe', api_id=recipe['id'], page='results') }}" class="position-absolute top-0 start-1">
                     <button class="
                     btn 
                     btn-sm 

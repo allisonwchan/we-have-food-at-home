@@ -3,11 +3,14 @@ from unittest import TestCase
 import requests
 
 from models import db, User, Recipe
-from secret_keys import API_SECRET_KEY
+from dotenv import load_dotenv
+
+load_dotenv()
+API_SECRET_KEY=os.environ['API_SECRET_KEY']
 
 os.environ['DATABASE_URL'] = "postgresql:///recipestest"
 
-from app import app, CURR_USER_KEY, BASE_URL
+from app import app
 db.create_all()
 app.config['WTF_CSRF_ENABLED'] = False
 
