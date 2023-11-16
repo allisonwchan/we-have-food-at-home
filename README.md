@@ -1,4 +1,4 @@
-# WFH (We have Food at Home!)
+# WFH! (We have Food at Home!)
 
 *Reduce food waste and do more home cooking by finding recipes based on ingredients you have!*
 
