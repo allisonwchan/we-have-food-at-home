@@ -35,6 +35,8 @@ In the navbar, there are 3 options for a logged in and logged out user: "WFH!", 
 
 Finally, a user can logout by clicking on their profile picture in the navbar and then clicking "Logout".
 
+__To run WFH! locally__, first clone the repo into a local directory. Navigate to the "applications" folder and create and activate a virtual environment. Once it is activated, install all dependencies from "requirements.txt". Then, in the command line, type "python app.py" and hit Enter. WFH! should load on http://127.0.0.1:5000 if successful.
+
 ### API
 WFH! is powered by the [Spoonacular](https://spoonacular.com/food-api/docs) API.
 

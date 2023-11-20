@@ -382,3 +382,7 @@ def unsave_recipe(api_id, page):
         return redirect(url_for('show_user_info', user_id=g.user.id))
     elif page == 'home':
         return redirect(url_for('show_homepage'))
+
+
+if __name__ == '__main__':  
+   app.run()

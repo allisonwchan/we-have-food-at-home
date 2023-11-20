@@ -6,7 +6,7 @@
 
 <div class="row">
     {% for user in users %}
-    <div class="card border-light mb-3" style="max-width: 20rem;">
+    <div class="card border-light mb-3">
         <div class="card-body">
             <a href="/users/{{user.id}}" class="stretched-link mb-1 d-flex justify-content-center">
                 <img src="{{ user.image_url }}" alt="{{ user.username }}" class="img-thumbnail" id="profile-pic-user-list">

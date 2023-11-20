@@ -5,7 +5,7 @@
 <h1>Find your new favorite recipes.</h1>
 
 <div class="input-group mb-2 justify-content-end">
-  <div class="col-md-10">
+  <div class="col-md-11">
     <form method="POST" id="search-form">
       {{ form.hidden_tag() }}
     
@@ -19,7 +19,7 @@
     </form>
   </div>
   
-  <div class="col-md-2">
+  <div class="col-md-1">
     <button class="btn btn-primary"><i class="bi bi-search"></i></button>
   </div>
   
@@ -38,7 +38,7 @@
 
 <div class="row">
   {% for recipe in recipes %}
-  <div class="card border-light" style="max-width: 20.5rem;">
+  <div class="card border-light">
       <div class="card-body">
           <div class="position-relative mb-3">
               <a href="/recipes/{{ recipe['id'] }}" target="_blank" rel="noopener noreferrer">
