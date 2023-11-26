@@ -10,7 +10,7 @@ from models import db, connect_db, User, Recipe
 from dotenv import load_dotenv
 
 load_dotenv()
-API_SECRET_KEY=os.environ['API_SECRET_KEY']
+API_SECRET_KEY=os.getenv('API_SECRET_KEY')
 
 CURR_USER_KEY = "curr_user"
 BASE_URL = "https://api.spoonacular.com/recipes"

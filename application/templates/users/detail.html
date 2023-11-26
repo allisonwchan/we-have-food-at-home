@@ -41,12 +41,12 @@
                         </a>
                         
                         {% if g.user and not g.user.is_saved(recipe) %}
-                        <form method="POST" action="{{ url_for('save_recipe', api_id=recipe['id'], page='user_detail') }}" class="position-absolute top-0 start-1">   
+                        <form method="POST" action="{{ url_for('save_recipe', api_id=recipe['api_id'], page='user_detail') }}" class="position-absolute top-0 start-1">   
                             <button class="btn btn-sm btn-primary">
                               <i class="bi bi-bookmark"></i>
                             </button>
                         </form>
-                        {% elif g.user %}
+                        {% elif g.user and g.user.is_saved(recipe) %}
                         <form method="POST" action="{{ url_for('unsave_recipe', api_id=recipe['api_id'], page='user_detail') }}" class="position-absolute top-0 start-1">
                           <button class="btn btn-sm btn-danger">
                             <i class="bi bi-trash"></i>
